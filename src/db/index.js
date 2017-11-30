@@ -51,6 +51,14 @@ class db_store {
         return self.query(`INSERT INTO connection (uid,vendor, title, host, port, db_name, user, password,created_at) 
         VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , ?)`, [parseInt(Math.random() * 1024), con.vendor, con.title, con.host, con.port, con.db_name, con.user, con.password, new Date()]);
     }
+    updateConnections(con) {
+        var self = this;
+        if (self.debug_mode) {
+            console.log(`updateConnections got: `, con)
+        }
+        return self.query(`update connection SET vendor= '?', SET title='?', SET host='?', SET port='?', SET db_name='?',SET user= '?', SET password= '?'
+         where uid = ?`, [ con.vendor, con.title, con.host, con.port, con.db_name, con.user, con.password,con.uid]);
+    }
     getConnections() {
         var self = this;
         if (self.debug_mode) {
