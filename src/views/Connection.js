@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import db from '../db';
-
+import {webSqlApi} from '../db';
+const db = webSqlApi;
 db.addConnections({vendor:'mysql', title:'dev1',
 host:'devdb-55gb.chfucjrlryhv.us-east-1.rds.amazonaws.com', port:'3306',
 db_name:'shelfmintdev2', user:'root', password:'z$Wuh!chBes3#a'}).then(r => {
@@ -204,7 +204,7 @@ this.setState(state)
                     }}>{this.state.edit === i
                         ? 'Save'
                         : 'Edit'}</a>
-                    <a className="card-footer-item">Delete</a>
+                    <a className="card-footer-item" onClick={()=>{this.handleDelete(c.uid)}}>Delete</a>
                   </footer>
                 </div>
               </div>
