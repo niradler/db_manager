@@ -1,21 +1,24 @@
 import React, {Component} from 'react';
 import db from '../db';
 
-// db.addConnections({vendor:'mysql', title:'dev1',
-// host:'devdb-55gb.chfucjrlryhv.us-east-1.rds.amazonaws.com', port:'3306',
-// db_name:'shelfmintdev2', user:'root', password:'z$Wuh!chBes3#a'}).then(r => {
-//   console.log('add con',r)   db.getConnections().then(r => {
-// console.log('con list',r)     const uid = r.rows[0].uid;
-// db.delConnections(uid).then(r => { console.log('del ',uid)
-// db.getConnections().then(r => { console.log('con list',r)       })  })   })
-// })
+db.addConnections({vendor:'mysql', title:'dev1',
+host:'devdb-55gb.chfucjrlryhv.us-east-1.rds.amazonaws.com', port:'3306',
+db_name:'shelfmintdev2', user:'root', password:'z$Wuh!chBes3#a'}).then(r => {
+  console.log('add con',r)   
+  db.getConnections().then(r => {
+console.log('con list',r)     
+const uid = r.rows[0].uid;
+db.delConnections(uid).then(r => { console.log('del ',uid)
+db.getConnections().then(r => { console.log('con list',r)       })  })   })
+})
 
 class Con extends Component {
   constructor(props) {
     super()
     this.state = {
         conArr: [],
-        edit: -1
+        edit: -1,
+        newCon:{}
     }
   }
 
@@ -39,11 +42,8 @@ handleUpdate(i){
 host:con.host, port:con.port,
 db_name:con.db_name, user:con.user, password:con.password}).then(r => {})
 }
-handleAdd(i){
-    const con = this.state.conArr[i];
-    db.addConnections({vendor:con.vendor, title:con.title,
-host:con.host, port:con.port,
-db_name:con.db_name, user:con.user, password:con.password}).then(r => {})
+handleAdd(){
+    db.addConnections(this.state.newCon).then(r => {})
 }
 getConnections(){
     db
@@ -56,15 +56,77 @@ getConnections(){
 }
 handleChange(e,i){
     const state= this.state;
-    debugger;
-     state.conArr[i][e.target.name]=e.target.value
+    if(i && i > 0){
+      state.conArr[i][e.target.name]=e.target.value
+    }else{
+      state.newCon[e.target.name]=e.target.value;
+    }
+     
 this.setState(state)
 }
   render() {
 
     return (
       <div className="App">
-
+      <div className="panel">
+      <p className="panel-heading">
+        New Connection
+      </p>
+      <div className="panel-block">
+        <div className="container">
+        <div className="columns">
+                            <div className="field">
+                              <label className="label">Title:</label>
+                              <div className="control">
+                                <input className="input" type="text" name="title"  onChange={(e)=>this.handleChange(e,-1)}/>
+                              </div>
+                            </div>
+                            <div className="field">
+                              <label className="label">Vendor:</label>
+                              <div className="control">
+                                <input className="input" type="text" name="vendor" value="mysql" disabled />
+                              </div>
+                            </div>
+                            <div className="field">
+                              <label className="label">Host:</label>
+                              <div className="control">
+                                <input className="input" type="text" name="host"  onChange={(e)=>this.handleChange(e,-1)}/>
+                              </div>
+                            </div>
+                            <div className="field">
+                              <label className="label">Port:</label>
+                              <div className="control">
+                                <input className="input" type="text" name="port"  onChange={(e)=>this.handleChange(e,-1)}/>
+                              </div>
+                            </div>
+                            <div className="field">
+                              <label className="label">DB Name:</label>
+                              <div className="control">
+                                <input className="input" type="text" name="db_name"  onChange={(e)=>this.handleChange(e,-1)}/>
+                              </div>
+                            </div>
+                            <div className="field">
+                              <label className="label">User:</label>
+                              <div className="control">
+                                <input className="input" type="text" name="user"  onChange={(e)=>this.handleChange(e,-1)}/>
+                              </div>
+                            </div>
+                            <div className="field">
+                              <label className="label">Password:</label>
+                              <div className="control">
+                                <input className="input" type="text" name="password"  onChange={(e)=>this.handleChange(e,-1)}/>
+                              </div>
+                            </div>
+                            <div className="field">
+    
+                              <div className="control">
+                                <button type="button" onClick={()=>this.handleAdd}>Add</button>
+                              </div>
+                            </div>
+                          </div>
+        </div>
+        </div>
+        </div> 
       <div className="panel">
       <p className="panel-heading">
         Connections

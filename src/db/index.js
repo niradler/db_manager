@@ -56,7 +56,7 @@ class db_store {
         if (self.debug_mode) {
             console.log(`updateConnections got: `, con)
         }
-        return self.query(`update connection SET vendor= '?', SET title='?', SET host='?', SET port='?', SET db_name='?',SET user= '?', SET password= '?'
+        return self.query(`update connection SET vendor= ?, title=?, host= ?, port=?,  db_name=?, user= ?,  password=?
          where uid = ?`, [ con.vendor, con.title, con.host, con.port, con.db_name, con.user, con.password,con.uid]);
     }
     getConnections() {
