@@ -1,5 +1,5 @@
-// import webSqlApi from './webSqlApi';
- import pouchdbApi from './pouchdbApi';
+
+ import Dexie from 'Dexie';
 class ConStore {
     constructor() {
         this.conArr = [];
