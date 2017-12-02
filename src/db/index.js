@@ -1,5 +1,5 @@
-import webSqlApi from './webSqlApi';
-import pouchdbApi from './pouchdbApi';
+// import webSqlApi from './webSqlApi';
+ import pouchdbApi from './pouchdbApi';
 class ConStore {
     constructor() {
         this.conArr = [];
@@ -7,14 +7,14 @@ class ConStore {
     addConnections(con) {
         this.conArr.push(con)
     }
-    updateConnections(con,i) {
+    updateConnections(con, i) {
         this.conArr[i] = con;
     }
     getConnections() {
-return this. conArr;
+        return this.conArr;
     }
-    delConnections(uid) {
-
+    delConnections(i) {
+        this.conArr.splice(i, 1);
     }
 }
 const store = new ConStore();

@@ -1,17 +1,9 @@
 import React, {Component} from 'react';
-import {webSqlApi} from '../db';
-const db = webSqlApi;
-db.addConnections({vendor:'mysql', title:'dev1',
-host:'devdb-55gb.chfucjrlryhv.us-east-1.rds.amazonaws.com', port:'3306',
-db_name:'shelfmintdev2', user:'root', password:'z$Wuh!chBes3#a'}).then(r => {
-  console.log('add con',r)   
-  db.getConnections().then(r => {
-console.log('con list',r)     
-const uid = r.rows[0].uid;
-db.delConnections(uid).then(r => { console.log('del ',uid)
-db.getConnections().then(r => { console.log('con list',r)       })  })   })
-})
+import store from '../db';
 
+store.addConnections({vendor:'mysql', title:'dev1',
+host:'devdb-55gb.chfucjrlryhv.us-east-1.rds.amazonaws.com', port:'3306',
+db_name:'shelfmintdev2', user:'root', password:'z$Wuh!chBes3#a'})
 class Con extends Component {
   constructor(props) {
     super()
@@ -31,32 +23,33 @@ handleEdit(i){
     this.setState({
         edit: isEdit
       })
-      isEdit ==-1? this.handleUpdate(loc):null;
+      isEdit ===-1? this.handleUpdate(loc):null;
 }
-handleDelete(uid){
-    
+handleDelete(i){
+store.delConnections(i);
+this.getConnections();
 }
 handleUpdate(i){
     const con = this.state.conArr[i];
-    db.updateConnections({vendor:con.vendor, title:con.title,
+    store.updateConnections({vendor:con.vendor, title:con.title,
 host:con.host, port:con.port,
-db_name:con.db_name, user:con.user, password:con.password}).then(r => {})
+db_name:con.db_name, user:con.user, password:con.password},i);
+this.getConnections();
 }
 handleAdd(){
-    db.addConnections(this.state.newCon).then(r => {})
+    store.addConnections(this.state.newCon)
+    debugger;
+    this.getConnections();
 }
 getConnections(){
-    db
-    .getConnections()
-    .then(r => {
-      this.setState({
-        conArr: [...r.rows]
-      });
-    })
+  const conArr = store.getConnections();
+  console.log('get connection',conArr)
+   this.setState({conArr:[...conArr]}) 
 }
 handleChange(e,i){
     const state= this.state;
-    if(i && i > 0){
+ 
+    if( i > -1){
       state.conArr[i][e.target.name]=e.target.value
     }else{
       state.newCon[e.target.name]=e.target.value;
@@ -118,9 +111,9 @@ this.setState(state)
                               </div>
                             </div>
                             <div className="field">
-    
+                            <label className="label">Action:</label>
                               <div className="control">
-                                <button type="button" onClick={()=>this.handleAdd}>Add</button>
+                                <button className="button" type="button" onClick={()=>{this.handleAdd();}}>Add</button>
                               </div>
                             </div>
                           </div>
