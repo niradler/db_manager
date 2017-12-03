@@ -57,6 +57,9 @@ handleChange(e,i){
      
 this.setState(state)
 }
+handleUse(i){
+this.props.history.push('/manage/'+i)
+}
   render() {
 
     return (
@@ -197,6 +200,7 @@ this.setState(state)
                     }}>{this.state.edit === i
                         ? 'Save'
                         : 'Edit'}</a>
+                        <a className="card-footer-item" onClick={()=>{this.handleUse(i)}}>Use</a>
                     <a className="card-footer-item" onClick={()=>{this.handleDelete(c.uid)}}>Delete</a>
                   </footer>
                 </div>

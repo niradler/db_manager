@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 import Con from '../views/Connection'
-import { Switch, Route } from 'react-router-dom'
+import Manage from '../views/Manage'
+import { Switch, Route,Link } from 'react-router-dom'
 // db.addConnections({vendor:'mysql', title:'dev1',
 // host:'devdb-55gb.chfucjrlryhv.us-east-1.rds.amazonaws.com', port:'3306',
 // db_name:'shelfmintdev2', user:'root', password:'z$Wuh!chBes3#a'}).then(r => {
@@ -55,9 +56,8 @@ class App extends Component {
                 ? 'navbar-menu is-active'
                 : 'navbar-menu'}>
                 <div className="navbar-start">
-                  <a className="navbar-item">
-                    Connection
-                  </a>
+                
+                  <Link className="navbar-item" to="/connections/">Connections</Link>
                 </div>
                 <div className="navbar-end"></div>
               </div>
@@ -68,8 +68,8 @@ class App extends Component {
           <div className="container">
           <Switch>
           <Route exact path='/' component={Con}/>
-          {/* both /roster and /roster/:number begin with /roster */}
-          <Route path='/connection' component={Con}/>
+          <Route path='/manage/:index' component={Manage}/>
+          <Route path='/connections' component={Con}/>
         </Switch>
    
           </div>
