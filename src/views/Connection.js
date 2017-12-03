@@ -56,7 +56,7 @@ getConnections(){
 }
 handleChange(e,i){
     const state= this.state;
-    if(i && i > 0){
+    if(i && i > -1){
       state.conArr[i][e.target.name]=e.target.value
     }else{
       state.newCon[e.target.name]=e.target.value;
