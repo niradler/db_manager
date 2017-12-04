@@ -17,6 +17,7 @@ class ConStore {
         return this.conArr[i];
     }
     delConnections(i) {
+        debugger;
         this.conArr.splice(i, 1);
         this.save();
     }

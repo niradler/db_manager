@@ -1,30 +1,19 @@
 import React, {Component} from 'react';
-import store from '../db';
+import store from '../store';
 import bridge from '../bridge';
-
+import Tables from '../components/Tables';
+import Sql from '../components/Sql';
 class Manage extends Component {
   constructor(props) {
     super()
     this.state = {
-        index:"",
-        con:{},
-        tables:[]
+        tab:'Tables',
+        update:Math.random()
     }
   }
-
-  componentWillMount() {
-      const i = this.props.match.params.index;
-      const con = store.getConnection(i);
-      bridge.init(con);
-      const tables = bridge.query('show tables;');
-      if(tables){
-        tables.then((res)=>{
-          const t = res.data.result;
-          this.setState({index:i,con,tables:t})
-        })
-      }
-  }
-
+changeTab(tab){
+this.setState({tab})
+}
   render() {
 
     return (
@@ -33,31 +22,20 @@ class Manage extends Component {
       <div className="tabs is-boxed">
       <ul>
         <li className="is-active">
-          <a>
+          <a onClick={()=>this.changeTab('Tables')}>
             <span className="icon is-small"><i className="fa fa-table"></i></span>
             <span>Tables</span>
           </a>
         </li>
         <li className="is-active">
-        <a>
+        <a  onClick={()=>this.changeTab('SQL')}>
           <span className="icon is-small"><i className="fa fa-database"></i></span>
           <span>SQL</span>
         </a>
       </li>
       </ul>
     </div>
-    <nav class="panel">
-    <div class="panel-block">
-    <aside class="menu">
-    <p class="menu-label">
-      {this.state.con.db_name}
-    </p>
-    <ul class="menu-list">
-      {this.state.tables.map(t=>(<li>{t}</li>))}
-    </ul>
-  </aside>
-  </div>
-</nav>
+    {this.state.tab === 'Tables' ? <Tables index={this.props.match.params.index} /> : <Sql index={this.props.match.params.index}/>}
       </div>
     );
   }

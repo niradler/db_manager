@@ -1,4 +1,4 @@
-import store from '../db';
+
 import axios from 'axios';
 class Bridge {
     constructor() {

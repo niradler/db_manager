@@ -3,14 +3,7 @@ import './App.css';
 import Con from '../views/Connection'
 import Manage from '../views/Manage'
 import { Switch, Route,Link } from 'react-router-dom'
-// db.addConnections({vendor:'mysql', title:'dev1',
-// host:'devdb-55gb.chfucjrlryhv.us-east-1.rds.amazonaws.com', port:'3306',
-// db_name:'shelfmintdev2', user:'root', password:'z$Wuh!chBes3#a'}).then(r => {
-//   console.log('add con',r)   db.getConnections().then(r => {
-// console.log('con list',r)     const uid = r.rows[0].uid;
-// db.delConnections(uid).then(r => { console.log('del ',uid)
-// db.getConnections().then(r => { console.log('con list',r)       })  })   })
-// })
+import store from '../store';
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +15,9 @@ class App extends Component {
   }
 
 
-
+componentWillMount(){
+  store.restore();
+}
   toggleMenu() {
     this.setState({
       menu: !this.state.menu
