@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import store from '../db';
 
-store.addConnections({vendor:'mysql', title:'dev1',
-host:'devdb-55gb.chfucjrlryhv.us-east-1.rds.amazonaws.com', port:'3306',
-db_name:'shelfmintdev2', user:'root', password:'z$Wuh!chBes3#a'})
+
 class Con extends Component {
   constructor(props) {
     super()

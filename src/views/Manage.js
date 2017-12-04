@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import store from '../db';
+import bridge from '../bridge';
 
 class Manage extends Component {
   constructor(props) {
@@ -13,7 +14,15 @@ class Manage extends Component {
 
   componentWillMount() {
       const i = this.props.match.params.index;
-   this.setState({index:i,con:store.getConnection(i)})
+      const con = store.getConnection(i);
+      bridge.init(con);
+      const tables = bridge.query('show tables;');
+      if(tables){
+        tables.then((res)=>{
+          const t = res.data.result;
+          this.setState({index:i,con,tables:t})
+        })
+      }
   }
 
   render() {
@@ -44,8 +53,7 @@ class Manage extends Component {
       {this.state.con.db_name}
     </p>
     <ul class="menu-list">
-      <li><a>Dashboard</a></li>
-      <li><a>Customers</a></li>
+      {this.state.tables.map(t=>(<li>{t}</li>))}
     </ul>
   </aside>
   </div>
