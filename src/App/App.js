@@ -52,7 +52,7 @@ componentWillMount(){
                 : 'navbar-menu'}>
                 <div className="navbar-start">
                 
-                  <Link className="navbar-item" to="/connections/">Connections</Link>
+                  <Link className="navbar-item" to="connections">Connections</Link>
                 </div>
                 <div className="navbar-end"></div>
               </div>

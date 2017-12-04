@@ -2,7 +2,7 @@
   "name": "db_app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://niradler.github.io/db_manager/build/",
+  "homepage": "https://niradler.github.io/db_manager/build",
   "dependencies": {
     "axios": "^0.17.1",
     "bulma": "^0.6.1",
