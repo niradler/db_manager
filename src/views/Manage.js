@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import store from '../store';
-import bridge from '../bridge';
+
 import Tables from '../components/Tables';
 import Sql from '../components/Sql';
 class Manage extends Component {

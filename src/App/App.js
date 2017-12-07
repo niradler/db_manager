@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Con from '../views/Connection'
 import Manage from '../views/Manage'
+import Compare from '../views/Compare'
 import { Switch, Route,Link } from 'react-router-dom'
 import store from '../store';
 
@@ -52,7 +53,8 @@ componentWillMount(){
                 : 'navbar-menu'}>
                 <div className="navbar-start">
                 
-                  <Link className="navbar-item" to="connections">Connections</Link>
+                  <Link className="navbar-item" to="/connections">Connections</Link>
+                  <Link className="navbar-item" to="/compare">Compare</Link>
                 </div>
                 <div className="navbar-end"></div>
               </div>
@@ -65,6 +67,7 @@ componentWillMount(){
           <Route exact path='/' component={Con}/>
           <Route path='/manage/:index' component={Manage}/>
           <Route path='/connections' component={Con}/>
+          <Route path='/compare' component={Compare}/>
         </Switch>
    
           </div>

@@ -70,7 +70,7 @@ class Sql extends Component {
             <tbody>
               
               {this.state.result.map((c)=>(
-                <tr>
+                <tr key={c}>
                 {typeof(c)==='object'?this.buildFields(c):c}
                 
                 </tr>

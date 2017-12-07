@@ -21,7 +21,8 @@ handleEdit(i){
     const loc = i;
     const isEdit=this.state.edit === i? -1: i;
     this.setState({
-        edit: isEdit
+        edit: isEdit,
+        showNew:false
       })
       isEdit ===-1? this.handleUpdate(loc):null;
 }
@@ -58,11 +59,12 @@ this.props.history.push('/manage/'+i)
     return (
       <div className="App">
 
-   <NewCon handleAdd={this.handleAdd}/>
+{this.state.showNew ? <NewCon handleAdd={this.handleAdd}/>:''}
+   
 
       <div className="panel">
       <p className="panel-heading">
-        Connections
+        Connections<i class="fa fa-edit is-pulled-right" onClick={()=>this.setState({showNew:!this.state.showNew})}></i>
       </p>
       <div className="panel-block">
         <div className="columns">
@@ -116,7 +118,7 @@ this.props.history.push('/manage/'+i)
                             <div className="field">
                               <label className="label">Password:</label>
                               <div className="control">
-                                <input className="input" type="text" name="password" value={c.password} onChange={(e)=>this.handleChange(e,i)}/>
+                                <input className="input" type="password" name="password" value={c.password} onChange={(e)=>this.handleChange(e,i)}/>
                               </div>
                             </div>
                           </div>
@@ -126,6 +128,10 @@ this.props.history.push('/manage/'+i)
                           </p>
                           <p>{c.host}</p>
                         </div>
+}
+{this
+  .state
+  .conArr.length==0?<p>No connection, please add connection in the icon above.</p>:''
 }
                     </div>
                   </div>
