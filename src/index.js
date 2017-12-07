@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import 'bulma/css/bulma.css';
 import './index.css';
 import App from './App/App';
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter  } from 'react-router-dom'
 
 import registerServiceWorker from './registerServiceWorker';
 
 
 ReactDOM.render(
-    <BrowserRouter>
+    <HashRouter>
     <App />
-    </BrowserRouter>, document.getElementById('root'));
+    </HashRouter>, document.getElementById('root'));
 
 registerServiceWorker();
 

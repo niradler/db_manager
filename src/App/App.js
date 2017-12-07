@@ -3,7 +3,7 @@ import './App.css';
 import Con from '../views/Connection'
 import Manage from '../views/Manage'
 import Compare from '../views/Compare'
-import { Switch, Route,Link } from 'react-router-dom'
+import { Switch, Route,Link, } from 'react-router-dom'
 import store from '../store';
 
 class App extends Component {
@@ -69,7 +69,6 @@ componentWillMount(){
           <Route path='/connections' component={Con}/>
           <Route path='/compare' component={Compare}/>
         </Switch>
-   
           </div>
         </section>
 
