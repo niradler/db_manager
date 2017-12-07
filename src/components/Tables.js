@@ -35,7 +35,7 @@ class Tables extends Component {
     const cols = bridge.query('describe ' + table);
     if(cols){
       cols.then((res)=>{
-        const c = res.data.result;
+        const c = res.data.result || [];
         this.setState({describe:c,update:Math.random(),cdescribe:table})
       })
     }
