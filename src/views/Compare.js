@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import store from '../store';
 import bridge from '../bridge';
 import Tables from '../components/Tables';
+import Compartion from '../components/Compartion';
 /*
 SHOW CREATE DATABASE ;
 SHOW TABLES;
@@ -96,11 +97,16 @@ this.setState({showCompare:!this.state.showCompare})
   {this.state.showCompare ?
   <div className="columns">
   <div className="column is-6">
+  <Compartion index={this.state.pick}/>
+  </div>
+  {/* 
+  <div className="column is-6">
     <Tables index={this.state.pick[0]}/>
   </div>
   <div className="column is-6">
   <Tables index={this.state.pick[1]}/>
   </div>
+   */}
   </div>
   :<p>no data</p>}
 </div>

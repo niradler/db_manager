@@ -64,7 +64,7 @@ this.props.history.push('/manage/'+i)
 
       <div className="panel">
       <p className="panel-heading">
-        Connections<i class="fa fa-edit is-pulled-right" onClick={()=>this.setState({showNew:!this.state.showNew})}></i>
+        Connections<i className="fa fa-edit is-pulled-right" onClick={()=>this.setState({showNew:!this.state.showNew})}></i>
       </p>
       <div className="panel-block">
         <div className="columns">

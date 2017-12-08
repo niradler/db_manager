@@ -19,7 +19,7 @@ class Tables extends Component {
       const i = this.props.index;
       const con = store.getConnection(i);
       bridge.init(con);
-      const tables = bridge.query('show tables;');
+      const tables = bridge.func({name:"getTables",params:[]});
       if(tables){
         tables.then((res)=>{
           const t = res.data.result;
